@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCooldown: 0.5
+  damage: 1
   firePosition: {fileID: 6109699006431507197}
   fireBalls:
   - {fileID: 0}
@@ -198,6 +199,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   fireBallsSound: {fileID: 8300000, guid: 6fee9b62ba3deab45a86f26b1dd2e142, type: 3}
+  playerCollider: {fileID: 7317716401115264897}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  range: 0
+  colliderDistance: 0
 --- !u!95 &8485782259851211392
 Animator:
   serializedVersion: 5

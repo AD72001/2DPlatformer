@@ -56,7 +56,6 @@ public class Pig : EnemyDamage
             if (PlayerInRange())
             {
                 playerHP.TakeDamage(base.enemyDamage);
-                Debug.Log("Damaged");
                 Stop();
             }
         }

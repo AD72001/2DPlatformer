@@ -8,6 +8,6 @@ public class ChangeArea : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) 
     {
         if (!boss.activeInHierarchy)
-            SceneManager.LoadScene("Level_1");
+            UIManager.instance.Victory();
     }
 }

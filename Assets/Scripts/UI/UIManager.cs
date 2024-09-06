@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance {get ; private set;}
     // Game Over
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private AudioClip gameOverSound;
@@ -11,10 +12,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private AudioClip pauseSound;
 
+    // Clear Stage
+    [SerializeField] private GameObject victoryScreen;
+    [SerializeField] private AudioClip victorySound;
+
     void Awake()
     {
+        instance = this;
+        
         gameOverScreen.SetActive(false);
         pauseScreen.SetActive(false);
+        victoryScreen.SetActive(false);
     }
 
     void Update()
@@ -65,13 +73,32 @@ public class UIManager : MonoBehaviour
         // Pause the game if status is true
         if (status)
             Time.timeScale = 0;
-        else Time.timeScale = 1;
+        else 
+            Time.timeScale = 1;
     }
+
+    public void EffectVolume()
+    {
+        SoundManager.instance.ChangeEffectVolume(0.2f);
+    }
+
+    public void BGMVolume()
+    {
+        SoundManager.instance.ChangeBGMVolume(0.2f);
+    }
+
     #endregion
 
-    public void ChangeVolume()
+    #region Victory Screen
+    public void Victory()
     {
-        SoundManager.instance.ChangeVolume(0.2f);
+        victoryScreen.SetActive(true);
+        SoundManager.instance.PlaySound(victorySound);
     }
 
+    public void NextLevel(int level)
+    {
+        SceneManager.LoadScene($"Level_{level}");
+    }
+    #endregion
 }

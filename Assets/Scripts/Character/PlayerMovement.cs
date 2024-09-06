@@ -24,11 +24,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int extraJumpNumber;
     private int JumpCounter;
 
-    // Wall Jump
-    [SerializeField] private float wallJumpForceX;
-    [SerializeField] private float wallJumpForceY;
-    // private float wallJumpCD;
-
     private float horizontalDirection;
 
     // Audio
@@ -64,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space) && playerBody.velocity.y > 0)
             playerBody.velocity = new Vector2(playerBody.velocity.x, playerBody.velocity.y / 2);
-
 
         playerBody.gravityScale = 5;
         playerBody.velocity = new Vector2(horizontalDirection*speed, playerBody.velocity.y);
@@ -111,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         coyoteTimer = 0;
     }
 
-    // BoxCast to check if the player is colliding with the ground.
+    // BoxCast to check if the player is colliding with the ground or an object.
     private bool OnGround()
     {
         RaycastHit2D rayCastHit2D_ground = Physics2D.BoxCast(playerCollider2D.bounds.center, 

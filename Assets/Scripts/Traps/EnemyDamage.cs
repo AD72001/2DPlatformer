@@ -8,7 +8,6 @@ public class EnemyDamage: MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            Debug.Log("Hit");
             collider.GetComponent<HP>().TakeDamage(enemyDamage);
         }
     }
@@ -17,7 +16,6 @@ public class EnemyDamage: MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Hit");
             collider.gameObject.GetComponent<HP>().TakeDamage(enemyDamage);
         }
     }

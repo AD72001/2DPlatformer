@@ -3,13 +3,13 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance { get; private set; }
-    private AudioSource source;
+    private AudioSource effectSource;
     private AudioSource BGM;
 
     private void Awake()
     {
         instance = this;
-        source = GetComponent<AudioSource>();
+        effectSource = GetComponent<AudioSource>();
         BGM = transform.GetChild(0).GetComponent<AudioSource>();
 
         // Keep instance from being destroyed
@@ -23,16 +23,29 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        //ChangeEffectVolume(0);
+        //ChangeBGMVolume(0);
     }
 
     public void PlaySound(AudioClip clip)
     {
-        source.PlayOneShot(clip);
+        effectSource.PlayOneShot(clip);
     }
 
-    public void ChangeVolume(float _value)
+    public void ChangeEffectVolume(float _value)
     {
-        float currentVolume = PlayerPrefs.GetFloat("soundVolume");
+        ChangeSoundVolume(1, "effectVolume", effectSource, _value);
+    }
+
+    public void ChangeBGMVolume(float _value)
+    {
+        ChangeSoundVolume(0.2f, "BGMVolume", BGM, _value);
+    }
+
+    public void ChangeSoundVolume(float maxVolume, string volumeName, AudioSource src, float _value)
+    {
+        float currentVolume = PlayerPrefs.GetFloat(volumeName);
 
         currentVolume += _value;
 
@@ -41,9 +54,8 @@ public class SoundManager : MonoBehaviour
         else if (currentVolume < 0)
             currentVolume = 1;
 
-        source.volume = currentVolume;
-        BGM.volume = currentVolume;
+        src.volume = currentVolume * maxVolume;
 
-        PlayerPrefs.SetFloat("soundVolume", currentVolume);
+        PlayerPrefs.SetFloat(volumeName, currentVolume);
     }
 }

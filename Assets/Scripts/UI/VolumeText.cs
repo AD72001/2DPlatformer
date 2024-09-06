@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class VolumeText : MonoBehaviour
 {
+    [SerializeField] private string audioText; // Audio:
+    [SerializeField] private string volumeName; // 0 - 100
     private TMP_Text txt;
 
     void Awake()
@@ -18,7 +20,7 @@ public class VolumeText : MonoBehaviour
 
     void UpdateVolumeText()
     {
-        float volume = PlayerPrefs.GetFloat("soundVolume")*100;
-        txt.text = "SOUND:" + volume.ToString();
+        float volume = PlayerPrefs.GetFloat(volumeName)*100;
+        txt.text = audioText + ":" + volume.ToString();
     }
 }
