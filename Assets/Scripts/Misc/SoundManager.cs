@@ -10,7 +10,9 @@ public class SoundManager : MonoBehaviour
     {
         instance = this;
         effectSource = GetComponent<AudioSource>();
-        BGM = transform.GetChild(0).GetComponent<AudioSource>();
+        if (transform.childCount > 0) 
+            BGM = transform.GetChild(0).GetComponent<AudioSource>();
+        else BGM = GetComponent<AudioSource>();
 
         // Keep instance from being destroyed
         if (instance == null)

@@ -41,13 +41,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4360525707244743158}
   - component: {fileID: 8447417089662216093}
+  - component: {fileID: 7317716401115264897}
   - component: {fileID: 7752849105230231631}
   - component: {fileID: 2228783554262756852}
   - component: {fileID: 6298297438810945284}
   - component: {fileID: 8485782259851211392}
   - component: {fileID: 6962575389201251946}
   - component: {fileID: 6765710334481944955}
-  - component: {fileID: 7317716401115264897}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -123,6 +123,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &7317716401115264897
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5802433830110719241}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.05270183, y: -0.5878269}
+  m_Size: {x: 0.63677454, y: 1.3397475}
+  m_Direction: 0
 --- !u!50 &7752849105230231631
 Rigidbody2D:
   serializedVersion: 4
@@ -139,7 +174,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ba341bcb41485574cb2a4dff995775ae, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -147,8 +182,8 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &2228783554262756852
 MonoBehaviour:
@@ -173,8 +208,6 @@ MonoBehaviour:
   playerHP: {fileID: 6962575389201251946}
   coyoteTime: 0.2
   extraJumpNumber: 1
-  wallJumpForceX: 0
-  wallJumpForceY: 0
   jumpSound: {fileID: 8300000, guid: 95db774fce53bf14ba4502565b7da6a8, type: 3}
 --- !u!114 &6298297438810945284
 MonoBehaviour:
@@ -199,12 +232,17 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   fireBallsSound: {fileID: 8300000, guid: 6fee9b62ba3deab45a86f26b1dd2e142, type: 3}
+  meleeSound: {fileID: 8300000, guid: 364c426bc6294c24ebaa06cf97c7f21d, type: 3}
   playerCollider: {fileID: 7317716401115264897}
+  playerRigidbody: {fileID: 7752849105230231631}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  range: 0
-  colliderDistance: 0
+  range: 1.31
+  colliderDistance: 0.48
+  chargeForceX: 12000
+  chargeForceY: 10
+  attackDuration: 1
 --- !u!95 &8485782259851211392
 Animator:
   serializedVersion: 5
@@ -260,38 +298,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkPointSound: {fileID: 8300000, guid: f11951e993bcca946901c30736df275d, type: 3}
---- !u!70 &7317716401115264897
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5802433830110719241}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.07013279, y: -0.54860735}
-  m_Size: {x: 0.8197994, y: 1.4181867}
-  m_Direction: 0

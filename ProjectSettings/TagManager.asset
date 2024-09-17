@@ -45,6 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background_Scene
+    uniqueID: 1440809045
+    locked: 0
   - name: Background
     uniqueID: 379965947
     locked: 0

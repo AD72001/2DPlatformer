@@ -108,11 +108,11 @@ public class PlayerMovement : MonoBehaviour
     // BoxCast to check if the player is colliding with the ground or an object.
     private bool OnGround()
     {
-        RaycastHit2D rayCastHit2D_ground = Physics2D.BoxCast(playerCollider2D.bounds.center, 
-            playerCollider2D.bounds.size, 0, Vector2.down, 0.01f, groundLayer);
+        RaycastHit2D rayCastHit2D_ground = Physics2D.CapsuleCast(playerCollider2D.bounds.center, 
+            playerCollider2D.bounds.size, CapsuleDirection2D.Horizontal, 0, Vector2.down, 0.01f, groundLayer);
 
-        RaycastHit2D rayCastHit2D_object = Physics2D.BoxCast(playerCollider2D.bounds.center, 
-            playerCollider2D.bounds.size, 0, Vector2.down, 0.01f, objectLayer);
+        RaycastHit2D rayCastHit2D_object = Physics2D.CapsuleCast(playerCollider2D.bounds.center, 
+            playerCollider2D.bounds.size, CapsuleDirection2D.Horizontal, 0, Vector2.down, 0.01f, objectLayer);
 
         return rayCastHit2D_ground.collider != null || rayCastHit2D_object.collider != null;
     }
