@@ -1,62 +1,39 @@
 using UnityEngine;
 
-public class Saw : MonoBehaviour
+public class Saw : EnemyDamage 
 {
-    // Trap Status
-    [SerializeField] private float damage;
-    [SerializeField] private float movingDistance;
-    [SerializeField] private float movingSpeed;
+    // Moving Points
+    [SerializeField] private Transform[] points;
+    [SerializeField] private int startingPoint;
+    private int currentPoint;
 
-    // Trap Movement
-    private bool movingLeft;
-    private float limitLeft;
-    private float limitRight;
+    // Movement, Direction
+    [SerializeField] private float speed;
+    
+    // Idling Time
+    [SerializeField] private float idleTime;
+    private float idleTimer;
 
-    // Audio
-    [SerializeField] private AudioClip sawSound;
-
-    void Awake()
-    {
-        limitLeft = transform.position.x - movingDistance;
-        limitRight = transform.position.x + movingDistance;
+    private void Awake() {
+        transform.position = points[startingPoint].position;
     }
 
     private void Update()
     {
-        // SoundManager.instance.PlaySound(sawSound);
+        if (Vector2.Distance(transform.position, points[currentPoint].position) < 0.02f)
+        {
+            idleTimer += Time.deltaTime;
 
-        if (movingLeft)
-        {
-            if (transform.position.x > limitLeft)
+            if (idleTimer > idleTime)
             {
-                transform.position = new Vector3(transform.position.x - movingSpeed*Time.deltaTime, 
-                    transform.position.y, transform.position.z);
+                currentPoint += 1;
+                idleTimer = 0;
             }
-            else
-            {
-                movingLeft = false;
-            }
-        }
-        else
-        {
-            if (transform.position.x < limitRight)
-            {
-                transform.position = new Vector3(transform.position.x + movingSpeed*Time.deltaTime, 
-                    transform.position.y, transform.position.z);
-            }
-            else
-            {
-                movingLeft = true;
-            }
+                
+            if (currentPoint >= points.Length)
+                currentPoint = 0;
         }
 
-    }
-    
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.CompareTag("Player"))
-        {
-            collider.GetComponent<HP>().TakeDamage(damage);
-        }
+        transform.position = Vector2.MoveTowards(transform.position, points[currentPoint].position, speed*Time.deltaTime);
     }
 }

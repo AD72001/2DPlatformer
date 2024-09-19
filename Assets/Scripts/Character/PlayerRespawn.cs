@@ -16,10 +16,16 @@ public class PlayerRespawn : MonoBehaviour
 
     private void CheckRespawn()
     {
+        // No checkpoint => game over
         if (currentCheckpoint == null)
         {
             uiManager.GameOver();
-
+            return;
+        }
+        // Running out of lives => game over
+        if (playerHP.currentLives <= 0)
+        {
+            uiManager.GameOver();
             return;
         }
 

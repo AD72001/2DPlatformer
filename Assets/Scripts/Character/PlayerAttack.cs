@@ -5,6 +5,7 @@ public class PlayerAttack : MonoBehaviour
     // Attack Status
     [SerializeField] private float attackCooldown;
     [SerializeField] private float damage;
+    [SerializeField] public float projectileTotal;
     private float attackCooldownDuration = Mathf.Infinity;
 
     // Components
@@ -15,7 +16,10 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] private CapsuleCollider2D playerCollider;
     [SerializeField] private Rigidbody2D playerRigidbody;
+
+    // Layers
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private LayerMask objectLayer;
     private Animator animator;
 
     // Attack Range
@@ -34,10 +38,12 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        // During the attack
+        // During the melee attack
         if (isAttacking && attackTimer < attackDuration)
         {
             attackTimer += Time.deltaTime;
+
+            animator.SetBool("walking", false);
             // Move
             playerRigidbody.AddForce(new Vector2(
                 playerCollider.transform.localScale.x*Time.deltaTime*chargeForceX, 
@@ -54,11 +60,17 @@ public class PlayerAttack : MonoBehaviour
             attackTimer = 0;
         }
 
-        if (Input.GetKey(KeyCode.E) && attackCooldownDuration >= attackCooldown)
+        // Range attack
+        if (Input.GetKey(KeyCode.E) 
+            && attackCooldownDuration >= attackCooldown
+            && projectileTotal > 0)
         {
-            Attack();
-        }
-        else if (Input.GetKey(KeyCode.Q) && attackCooldownDuration >= attackCooldown)
+            RangeAttack();
+        } 
+        // Melee attack
+        else if (Input.GetKey(KeyCode.Q) 
+            && attackCooldownDuration >= attackCooldown
+            && GetComponent<PlayerMovement>().OnGround())
         {
             MeleeAttack();
         }
@@ -66,11 +78,12 @@ public class PlayerAttack : MonoBehaviour
         attackCooldownDuration += Time.deltaTime;
     }
 
-    private void Attack()
+    private void RangeAttack()
     {
         animator.SetTrigger("attack");
         SoundManager.instance.PlaySound(fireBallsSound);
         attackCooldownDuration = 0;
+        projectileTotal--;
 
         fireBalls[LoadFireballs()].transform.position = firePosition.position;
         fireBalls[LoadFireballs()].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x));
@@ -91,9 +104,19 @@ public class PlayerAttack : MonoBehaviour
             , new Vector3(playerCollider.bounds.size.x * range, playerCollider.bounds.size.y, playerCollider.bounds.size.z)
             , 0, transform.localScale, 0, enemyLayer);
 
+        RaycastHit2D objectHit = Physics2D.BoxCast(
+            playerCollider.bounds.center + transform.right*range*transform.localScale.x*colliderDistance
+            , new Vector3(playerCollider.bounds.size.x * range, playerCollider.bounds.size.y, playerCollider.bounds.size.z)
+            , 0, transform.localScale, 0, objectLayer);
+
         if (enemyHit.collider != null)
         {
             enemyHit.transform.GetComponent<HP>().TakeDamage(damage);
+        }
+
+        if (objectHit.collider != null)
+        {
+            objectHit.transform.GetComponent<HP>().TakeDamage(damage);
         }
     }
 
@@ -108,6 +131,11 @@ public class PlayerAttack : MonoBehaviour
         }
 
         return 0;
+    }
+
+    public void AddProjectile(float value)
+    {
+        projectileTotal += value;
     }
 
     private void OnDrawGizmos() 

@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class HP : MonoBehaviour
@@ -7,6 +6,10 @@ public class HP : MonoBehaviour
     // HP
     [SerializeField] private float startingHP;
     public float currentHP { get; private set; }
+
+    // Lives
+    [SerializeField] private float startingLives;
+    public float currentLives { get; private set; }
 
     // IFrames
     [SerializeField] private float iFramesDuration;
@@ -26,6 +29,8 @@ public class HP : MonoBehaviour
     private void Awake()
     {
         currentHP = startingHP;
+        currentLives = startingLives;
+
         playerAnimator = gameObject.GetComponent<Animator>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
@@ -75,6 +80,17 @@ public class HP : MonoBehaviour
         currentHP = Mathf.Clamp(currentHP + _addHP, 0, startingHP);
     }
 
+    public void AddLives(float _addLives)
+    {
+        currentLives += _addLives;
+    }
+
+    public void AddHPMax(float _addHPMax)
+    {
+        startingHP += _addHPMax;
+        currentHP = Mathf.Clamp(currentHP + _addHPMax, 0, startingHP);
+    }
+
     public void Respawn()
     {
         foreach (Behaviour comp in components)
@@ -83,6 +99,7 @@ public class HP : MonoBehaviour
                 comp.enabled = true;
         }
 
+        currentLives--;
         AddHP(startingHP);
         playerAnimator.ResetTrigger("dead");
         playerAnimator.Play("Idle");

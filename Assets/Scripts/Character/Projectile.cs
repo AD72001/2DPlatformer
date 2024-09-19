@@ -34,7 +34,7 @@ public class Projectile : MonoBehaviour
         projBoxCollider.enabled = false;
         projAnimator.SetTrigger("explode");
 
-        if (collider.CompareTag("Enemy"))
+        if (collider.CompareTag("Enemy") || collider.CompareTag("Object"))
         {
             if (collider.GetComponent<HP>() != null)
                 collider.GetComponent<HP>().TakeDamage(1);

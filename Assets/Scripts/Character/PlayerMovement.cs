@@ -41,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (animator.GetBool("meleeAttack")) return;
+        
         horizontalDirection = Input.GetAxis("Horizontal"); // Input Left, Right
 
         // Flipping sprite
@@ -48,6 +50,9 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         else if (horizontalDirection < -0.01f)
             transform.localScale = new Vector3(-1, 1, 1);
+        else {
+            playerBody.gravityScale = 0;
+        }
 
         // Set animation Idle -> Walking
         animator.SetBool("walking", horizontalDirection != 0);
@@ -83,6 +88,8 @@ public class PlayerMovement : MonoBehaviour
 
         SoundManager.instance.PlaySound(jumpSound);
 
+        animator.SetTrigger("jump");
+
         if (OnGround())
         {
             JumpCounter = extraJumpNumber;
@@ -106,14 +113,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // BoxCast to check if the player is colliding with the ground or an object.
-    private bool OnGround()
+    public bool OnGround()
     {
-        RaycastHit2D rayCastHit2D_ground = Physics2D.CapsuleCast(playerCollider2D.bounds.center, 
-            playerCollider2D.bounds.size, CapsuleDirection2D.Horizontal, 0, Vector2.down, 0.01f, groundLayer);
+        RaycastHit2D rayCastHit2D_ground = Physics2D.BoxCast(playerCollider2D.bounds.center, 
+            new Vector3(playerCollider2D.bounds.size.x*0.5f, playerCollider2D.bounds.size.y, playerCollider2D.bounds.size.z),
+            0, Vector2.down, 0.02f, groundLayer);
 
-        RaycastHit2D rayCastHit2D_object = Physics2D.CapsuleCast(playerCollider2D.bounds.center, 
-            playerCollider2D.bounds.size, CapsuleDirection2D.Horizontal, 0, Vector2.down, 0.01f, objectLayer);
+        RaycastHit2D rayCastHit2D_object = Physics2D.BoxCast(playerCollider2D.bounds.center, 
+            new Vector3(playerCollider2D.bounds.size.x*0.5f, playerCollider2D.bounds.size.y, playerCollider2D.bounds.size.z),
+            0, Vector2.down, 0.02f, objectLayer);
 
         return rayCastHit2D_ground.collider != null || rayCastHit2D_object.collider != null;
     }
 }
+
