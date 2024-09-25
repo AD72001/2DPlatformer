@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    // Projectile stat
     [SerializeField] private float speed;
     private BoxCollider2D projBoxCollider;
     private Animator projAnimator;

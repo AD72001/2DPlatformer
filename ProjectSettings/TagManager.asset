@@ -13,7 +13,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PC_Projectile
   - Water
   - UI
   - Ground
@@ -22,7 +22,7 @@ TagManager:
   - Enemy
   - GroundCollider
   - Object
-  - 
+  - DamageOnCollide
   - 
   - 
   - 
@@ -54,6 +54,9 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 2353328931
+    locked: 0
+  - name: Enemy
+    uniqueID: 1558299587
     locked: 0
   - name: Player
     uniqueID: 2491773085

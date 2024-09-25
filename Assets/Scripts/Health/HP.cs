@@ -68,6 +68,7 @@ public class HP : MonoBehaviour
                     comp.enabled = false;
             }
 
+            playerAnimator.SetBool("meleeAttack", false);
             playerAnimator.SetBool("onGround", true);
             playerAnimator.SetTrigger("dead");
 
