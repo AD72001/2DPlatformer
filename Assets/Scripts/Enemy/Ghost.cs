@@ -5,7 +5,6 @@ public class Ghost : FlyingEnemy
 {
     // Enemy Stat
     [SerializeField] private float distance;
-    private bool isHurting = false;
 
     private void Awake() 
     {

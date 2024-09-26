@@ -72,14 +72,6 @@ public class PlayerMovement : MonoBehaviour
             coyoteTimer = coyoteTime;
         else
             coyoteTimer -= Time.deltaTime;
-
-        // dead from gravity?
-        if (playerBody.transform.position.y < -5.0f)
-        {
-            GetComponent<PlayerMovement>().enabled = false;
-            playerBody.gravityScale = 0;
-            playerHP.PlayerDead();
-        } 
     }
 
     private void Jump()

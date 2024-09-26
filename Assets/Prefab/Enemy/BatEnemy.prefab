@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 0}
+  - {fileID: 1323027650126554053}
 --- !u!1 &6400333447435622172
 GameObject:
   m_ObjectHideFlags: 0

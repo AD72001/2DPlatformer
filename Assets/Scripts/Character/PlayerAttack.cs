@@ -56,6 +56,7 @@ public class PlayerAttack : MonoBehaviour
             isAttacking = false;
 
             animator.SetBool("meleeAttack", false);
+            Physics.IgnoreLayerCollision(8, 9, false);
 
             attackTimer = 0;
         }
@@ -94,6 +95,7 @@ public class PlayerAttack : MonoBehaviour
         animator.SetBool("meleeAttack", true);
         SoundManager.instance.PlaySound(meleeSound);
         isAttacking = true;
+        Physics.IgnoreLayerCollision(8, 9, true);
         attackCooldownDuration = 0;
     }
     
