@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 5034380403240857260}
+  - {fileID: 0}
 --- !u!1 &6400333447435622172
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,8 +104,8 @@ GameObject:
   - component: {fileID: 2935324126132430017}
   - component: {fileID: 3623109099095264358}
   - component: {fileID: 6383001655048337936}
-  - component: {fileID: 5034380403240857260}
   - component: {fileID: 5828006370897395356}
+  - component: {fileID: 1323027650126554053}
   m_Layer: 9
   m_Name: Bat
   m_TagString: Enemy
@@ -246,23 +246,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5034380403240857260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6400333447435622172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98442db88801ca640a3d4e19008afeff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyDamage: 1
-  speed: 5
-  startingPoint: {fileID: 6555549607129670015}
-  isChasing: 0
-  animator: {fileID: 6383001655048337936}
 --- !u!114 &5828006370897395356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,7 +266,24 @@ MonoBehaviour:
   defeatSound: {fileID: 8300000, guid: 787d7b788bc665d44a526512873955ad, type: 3}
   playerAnimator: {fileID: 6383001655048337936}
   components:
-  - {fileID: 5034380403240857260}
+  - {fileID: 1323027650126554053}
+--- !u!114 &1323027650126554053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6400333447435622172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ef71ede656cd54ab10fa1b14f52b16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDamage: 0
+  speed: 5
+  isChasing: 0
+  animator: {fileID: 6383001655048337936}
+  startingPoint: {fileID: 6555549607129670015}
 --- !u!1 &6809949768786317832
 GameObject:
   m_ObjectHideFlags: 0

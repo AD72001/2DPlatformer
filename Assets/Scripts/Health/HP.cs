@@ -21,6 +21,7 @@ public class HP : MonoBehaviour
     [SerializeField] private AudioClip defeatSound;
 
     [SerializeField] private Animator playerAnimator;
+    
     private bool defeat = false;
     private bool isInvul = false;
 

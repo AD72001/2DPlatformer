@@ -41,6 +41,7 @@ public class Projectile : MonoBehaviour
                 collider.GetComponent<HP>().TakeDamage(1);
         }
     }
+
     public void SetDirection(float _direction)
     {
         lifeTime = 0;

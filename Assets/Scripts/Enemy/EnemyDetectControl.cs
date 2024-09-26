@@ -10,7 +10,6 @@ public class EnemyDetectControl : MonoBehaviour
         {
             foreach (FlyingEnemy enemy in enemies)
             {
-                enemy.animator.SetTrigger("detect");
                 enemy.isChasing = true;
             }
         }
