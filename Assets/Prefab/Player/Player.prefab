@@ -206,6 +206,7 @@ MonoBehaviour:
   speed: 10
   jumpForce: 18
   playerHP: {fileID: 6962575389201251946}
+  keyTotal: 0
   coyoteTime: 0.2
   extraJumpNumber: 1
   jumpSound: {fileID: 8300000, guid: 95db774fce53bf14ba4502565b7da6a8, type: 3}
@@ -233,7 +234,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   fireBallsSound: {fileID: 8300000, guid: 6fee9b62ba3deab45a86f26b1dd2e142, type: 3}
-  meleeSound: {fileID: 8300000, guid: 364c426bc6294c24ebaa06cf97c7f21d, type: 3}
   playerCollider: {fileID: 7317716401115264897}
   playerRigidbody: {fileID: 7752849105230231631}
   enemyLayer:
@@ -247,6 +247,7 @@ MonoBehaviour:
   chargeForceX: 5000
   chargeForceY: 0
   attackDuration: 0.2
+  dashSound: {fileID: 8300000, guid: 95db774fce53bf14ba4502565b7da6a8, type: 3}
 --- !u!95 &8485782259851211392
 Animator:
   serializedVersion: 5
@@ -286,7 +287,6 @@ MonoBehaviour:
   numberOfFlashes: 10
   hurtSound: {fileID: 8300000, guid: 15d70b62dd7973646b1a566e6a612364, type: 3}
   defeatSound: {fileID: 8300000, guid: 787d7b788bc665d44a526512873955ad, type: 3}
-  playerAnimator: {fileID: 8485782259851211392}
   components:
   - {fileID: 6298297438810945284}
   - {fileID: 2228783554262756852}

@@ -32,7 +32,7 @@ public class EnemyProjectile : EnemyDamage
             gameObject.SetActive(false);
     }
 
-    void OnCollisionEnter2D(Collision2D collider) 
+    private void OnCollisionEnter2D(Collision2D collider) 
     {
         if (!collider.gameObject.CompareTag("Enemy"))
         {

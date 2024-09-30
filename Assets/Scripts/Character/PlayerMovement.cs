@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed; // Player speed
     [SerializeField] private float jumpForce; // Player jump force
     [SerializeField] private HP playerHP;
+    public int keyTotal = 0;
 
     // Coyote Jump
     [SerializeField] private float coyoteTime; // Time for Jump after leaving an edge
@@ -50,9 +51,6 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         else if (horizontalDirection < -0.01f)
             transform.localScale = new Vector3(-1, 1, 1);
-        else {
-            playerBody.gravityScale = 0;
-        }
 
         // Set animation Idle -> Walking
         animator.SetBool("walking", horizontalDirection != 0);

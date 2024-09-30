@@ -5,6 +5,7 @@ public class Ghost : FlyingEnemy
 {
     // Enemy Stat
     [SerializeField] private float distance;
+    [SerializeField] private AudioClip ghostSound;
 
     private void Awake() 
     {
@@ -18,6 +19,11 @@ public class Ghost : FlyingEnemy
             return;
 
         Flip();
+
+        if (player.GetComponent<HP>().defeat)
+        {
+            isChasing = false;
+        }
 
         if (isChasing)
         {
@@ -34,6 +40,8 @@ public class Ghost : FlyingEnemy
     private IEnumerator FadeInOutIE()
     {
         isChasing = false;
+
+        SoundManager.instance.PlaySound(ghostSound);
 
         animator.SetTrigger("disappear");
         yield return new WaitForSeconds(0.5f);

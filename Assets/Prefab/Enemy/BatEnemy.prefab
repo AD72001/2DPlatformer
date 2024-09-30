@@ -264,7 +264,6 @@ MonoBehaviour:
   numberOfFlashes: 10
   hurtSound: {fileID: 8300000, guid: 15d70b62dd7973646b1a566e6a612364, type: 3}
   defeatSound: {fileID: 8300000, guid: 787d7b788bc665d44a526512873955ad, type: 3}
-  playerAnimator: {fileID: 6383001655048337936}
   components:
   - {fileID: 1323027650126554053}
 --- !u!114 &1323027650126554053
@@ -279,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ef71ede656cd54ab10fa1b14f52b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDamage: 0
+  enemyDamage: 1
   speed: 5
   isChasing: 0
   animator: {fileID: 6383001655048337936}

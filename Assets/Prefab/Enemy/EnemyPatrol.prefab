@@ -77,12 +77,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a34308f3c58e254885d822990b3783b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftLimit: {fileID: 4380651534300629355}
-  rightLimit: {fileID: 8000808235211227432}
+  leftLimit: {fileID: 0}
+  rightLimit: {fileID: 0}
   enemy: {fileID: 0}
   animator: {fileID: 0}
-  spriteDirection: -1
-  speed: 4
+  spriteDirection: 1
+  speed: 5
   idleTime: 2
   idleTimer: 0
 --- !u!1 &9019866089526512174

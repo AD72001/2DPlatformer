@@ -12,7 +12,6 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform firePosition;
     [SerializeField] private GameObject[] fireBalls;
     [SerializeField] private AudioClip fireBallsSound;
-    [SerializeField] private AudioClip meleeSound;
 
     [SerializeField] private CapsuleCollider2D playerCollider;
     [SerializeField] private Rigidbody2D playerRigidbody;
@@ -22,18 +21,22 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private LayerMask objectLayer;
     private Animator animator;
 
-    // Attack Range
+    // Dash Range
     [SerializeField] private float range;
     [SerializeField] private float colliderDistance;
     [SerializeField] private float chargeForceX;
     [SerializeField] private float chargeForceY;
     [SerializeField] private float attackDuration;
+    [SerializeField] private AudioClip dashSound;
     private float attackTimer;
     private bool isAttacking; // melee attack only
+
+    private float origravity;
     
     void Awake()
     {
         animator = GetComponent<Animator>();
+        origravity = playerRigidbody.gravityScale;
     }
 
     void Update()
@@ -49,14 +52,16 @@ public class PlayerAttack : MonoBehaviour
                 playerCollider.transform.localScale.x*Time.deltaTime*chargeForceX, 
                 Time.deltaTime*chargeForceY));
 
-            CheckInRange();
+            // CheckInRange();
         }
         else if (attackTimer >= attackDuration)
         {
             isAttacking = false;
 
+            playerRigidbody.gravityScale = origravity;
+
             animator.SetBool("meleeAttack", false);
-            Physics.IgnoreLayerCollision(8, 9, false);
+            Physics2D.IgnoreLayerCollision(8, 9, false);
 
             attackTimer = 0;
         }
@@ -93,9 +98,10 @@ public class PlayerAttack : MonoBehaviour
     private void MeleeAttack()
     {
         animator.SetBool("meleeAttack", true);
-        SoundManager.instance.PlaySound(meleeSound);
+        SoundManager.instance.PlaySound(dashSound);
         isAttacking = true;
-        Physics.IgnoreLayerCollision(8, 9, true);
+        Physics2D.IgnoreLayerCollision(8, 9, true);
+        playerRigidbody.gravityScale = 0;
         attackCooldownDuration = 0;
     }
     

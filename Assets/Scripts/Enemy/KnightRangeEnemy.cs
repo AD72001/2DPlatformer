@@ -3,7 +3,6 @@ using UnityEngine;
 public class KnightRangeEnemy : MonoBehaviour
 {
     // Enemy Status
-    [SerializeField] private float speed;
     [SerializeField] private float attackCD;
     private float CDTimer = Mathf.Infinity;
 

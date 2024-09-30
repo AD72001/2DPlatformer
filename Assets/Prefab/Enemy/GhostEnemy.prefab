@@ -199,10 +199,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee74232b2133e1498065ed65b2f7df2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDamage: 0
+  enemyDamage: 1
   speed: 5
   isChasing: 0
-  animator: {fileID: 0}
+  animator: {fileID: 593077163084184415}
   distance: 2
 --- !u!114 &6739452087781757595
 MonoBehaviour:
@@ -217,12 +217,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHP: 3
-  startingLives: 1
+  startingLives: 0
   iFramesDuration: 0
   numberOfFlashes: 0
   hurtSound: {fileID: 8300000, guid: 15d70b62dd7973646b1a566e6a612364, type: 3}
   defeatSound: {fileID: 8300000, guid: 787d7b788bc665d44a526512873955ad, type: 3}
-  playerAnimator: {fileID: 593077163084184415}
   components:
   - {fileID: 2068021513384651163}
 --- !u!1 &8970305067753547339

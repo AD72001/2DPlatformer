@@ -20,9 +20,9 @@ public class HP : MonoBehaviour
     [SerializeField] private AudioClip hurtSound;
     [SerializeField] private AudioClip defeatSound;
 
-    [SerializeField] private Animator playerAnimator;
+    private Animator animator;
     
-    private bool defeat = false;
+    public bool defeat {get; private set;}
     private bool isInvul = false;
 
     [SerializeField] private Behaviour[] components;
@@ -32,7 +32,9 @@ public class HP : MonoBehaviour
         currentHP = startingHP;
         currentLives = startingLives;
 
-        playerAnimator = gameObject.GetComponent<Animator>();
+        defeat = false;
+
+        animator = gameObject.GetComponent<Animator>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
     
@@ -45,7 +47,7 @@ public class HP : MonoBehaviour
 
             if (currentHP > 0)
             {
-                playerAnimator.SetTrigger("hurt");
+                animator.SetTrigger("hurt");
                 SoundManager.instance.PlaySound(hurtSound);
                 StartCoroutine(Invulnerable());
             }
@@ -69,9 +71,9 @@ public class HP : MonoBehaviour
                     comp.enabled = false;
             }
 
-            playerAnimator.SetBool("meleeAttack", false);
-            playerAnimator.SetBool("onGround", true);
-            playerAnimator.SetTrigger("dead");
+            animator.SetBool("meleeAttack", false);
+            animator.SetBool("onGround", true);
+            animator.SetTrigger("dead");
 
             // Deactivate();
         }
@@ -103,8 +105,8 @@ public class HP : MonoBehaviour
 
         currentLives--;
         AddHP(startingHP);
-        playerAnimator.ResetTrigger("dead");
-        playerAnimator.Play("Idle");
+        animator.ResetTrigger("dead");
+        animator.Play("Idle");
 
         StartCoroutine(Invulnerable());
 
@@ -116,7 +118,7 @@ public class HP : MonoBehaviour
     {
         isInvul = true;
 
-        Physics.IgnoreLayerCollision(8, 9, true);
+        Physics2D.IgnoreLayerCollision(8, 9, true);
 
         for (int i = 0; i < numberOfFlashes; i++)   {
             spriteRenderer.color = new Color(1, 0, 0, 0.4f);
@@ -125,7 +127,7 @@ public class HP : MonoBehaviour
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
         }
 
-        Physics.IgnoreLayerCollision(8, 9, false);
+        Physics2D.IgnoreLayerCollision(8, 9, false);
 
         isInvul = false;
     }
