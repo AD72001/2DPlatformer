@@ -6,6 +6,7 @@ public class FlyingEnemy : EnemyDamage
     // Enemy stat
     [SerializeField] protected float speed;
     public bool isChasing = false;
+    public bool isActive = false;
     public Animator animator;
 
     void Awake()
@@ -16,7 +17,9 @@ public class FlyingEnemy : EnemyDamage
 
     protected void Chase()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed*Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, 
+            player.GetComponent<Collider2D>().bounds.center, 
+            speed*Time.deltaTime);
     }
 
     protected void Flip()

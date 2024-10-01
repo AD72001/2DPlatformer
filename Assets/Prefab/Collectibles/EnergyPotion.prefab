@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6502aab5b82366841bbea386d947d1f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectileRestoreValue: 5
+  ProjectileRestoreValue: 10
   collectSound: {fileID: 8300000, guid: da6b8c12987af45448b3d75c1ce0c9ac, type: 3}
 --- !u!95 &7488975477215599556
 Animator:

@@ -30,8 +30,40 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3389502848917105168}
+  - {fileID: 8718395441776594951}
   - {fileID: 6163711663173422329}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3633042736835104805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8718395441776594951}
+  m_Layer: 0
+  m_Name: StartingPostion
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8718395441776594951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3633042736835104805}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.42, y: 0.82, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1543106823204193725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5287088688585299231
 GameObject:
@@ -202,8 +234,11 @@ MonoBehaviour:
   enemyDamage: 1
   speed: 5
   isChasing: 0
+  isActive: 0
   animator: {fileID: 593077163084184415}
   distance: 2
+  ghostSound: {fileID: 8300000, guid: 2228c3462d2f31145998c190fb160bf5, type: 3}
+  startingPoint: {fileID: 8718395441776594951}
 --- !u!114 &6739452087781757595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,7 +286,7 @@ Transform:
   m_GameObject: {fileID: 8970305067753547339}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.935227, y: 0.47840244, z: -0.016548019}
+  m_LocalPosition: {x: 4.9352264, y: 0.4784025, z: -0.016548019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

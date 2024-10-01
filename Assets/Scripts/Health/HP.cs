@@ -4,7 +4,7 @@ using UnityEngine;
 public class HP : MonoBehaviour
 {
     // HP
-    [SerializeField] private float startingHP;
+    [SerializeField] public float startingHP;
     public float currentHP { get; private set; }
 
     // Lives

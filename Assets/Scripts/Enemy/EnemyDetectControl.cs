@@ -11,6 +11,7 @@ public class EnemyDetectControl : MonoBehaviour
             foreach (FlyingEnemy enemy in enemies)
             {
                 enemy.isChasing = true;
+                enemy.isActive = true;
             }
         }
     }
@@ -19,7 +20,10 @@ public class EnemyDetectControl : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             foreach (FlyingEnemy enemy in enemies)
+            {
                 enemy.isChasing = false;
+                enemy.isActive = false;
+            }
         }
     }
 }

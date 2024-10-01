@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KnightMeleeEnemy : EnemyDamage
@@ -19,6 +17,7 @@ public class KnightMeleeEnemy : EnemyDamage
 
     // Audio
     [SerializeField] private AudioClip meleeSound;
+
     private EnemyPatrol enemyPatrol;
 
     void Awake()
@@ -34,18 +33,22 @@ public class KnightMeleeEnemy : EnemyDamage
 
         if (PlayerInSight())
         {
+            animator.SetBool("moving", false);
             if (CDTimer >= attackCD)
             {
                 // Attack
                 CDTimer = 0;
+
                 animator.SetTrigger("meleeAttack");
+                animator.SetBool("isAttacking", true);
+
                 SoundManager.instance.PlaySound(meleeSound);
             }
         }
         
         if (enemyPatrol != null)
         {
-            enemyPatrol.enabled = !PlayerInSight();
+            enemyPatrol.enabled = !animator.GetBool("isAttacking") && !PlayerInSight();
         }
     }
 
@@ -70,6 +73,11 @@ public class KnightMeleeEnemy : EnemyDamage
         {
             playerHP.TakeDamage(enemyDamage);
         }
+    }
+
+    private void FinishAttack()
+    {
+        animator.SetBool("isAttacking", false);
     }
 
     private void OnDrawGizmos() 
