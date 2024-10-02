@@ -6,7 +6,7 @@ public class FlyingEnemy : EnemyDamage
     // Enemy stat
     [SerializeField] protected float speed;
     public bool isChasing = false;
-    public bool isActive = false;
+    public bool isActive = true;
     public Animator animator;
 
     void Awake()

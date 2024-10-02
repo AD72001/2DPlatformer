@@ -35,7 +35,7 @@ public class Ghost : FlyingEnemy
             Chase();
         }
 
-        if (!isActive)
+        if (!isActive && Vector2.Distance(transform.position, startingPoint.position) > 0.02f)
         {
             StartCoroutine(FadeInOutIE(startingPoint.position));
         }
@@ -43,22 +43,22 @@ public class Ghost : FlyingEnemy
 
     private void FadeInOut()
     {
+        isChasing = false;
+
         SoundManager.instance.PlaySound(ghostSound);
         StartCoroutine(FadeInOutIE(player.transform.position + new Vector3(distance, 0, 0)*-1*player.transform.localScale.x));
+        
+        // isChasing = true;
     }
 
     // Teleport behind the player when hit
     private IEnumerator FadeInOutIE(Vector3 destination)
     {
-        isChasing = false;
-
         animator.SetTrigger("disappear");
         yield return new WaitForSeconds(0.5f);
         transform.position = destination;
         yield return new WaitForSeconds(0.5f);
         animator.SetTrigger("appear");
         yield return new WaitForSeconds(0.5f);
-
-        isChasing = true;
     }
 }
