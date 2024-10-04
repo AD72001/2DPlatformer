@@ -8,6 +8,7 @@ public class BOD_Boss : EnemyDamage
     private GameObject player;
 
     // Components
+    public int phase;
     private Animator animator;
     [SerializeField] private Collider2D cl;
 
@@ -21,6 +22,9 @@ public class BOD_Boss : EnemyDamage
     [SerializeField] private float castingCD;
     private float castingTimer = Mathf.Infinity;
 
+    // Spell
+    [SerializeField] private GameObject[] spells;
+
     [SerializeField] private float speed;
     public bool isChasing;
     public bool isAttacking;
@@ -28,10 +32,15 @@ public class BOD_Boss : EnemyDamage
     private void Awake() {
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
+        phase = 1;
     }
 
     private void Update() 
     {
+        if (phase == 2) 
+            isChasing = false;
+
+        
         castingTimer += Time.deltaTime;
         // Melee
         if (PlayerInAttackRange() && !isAttacking)
@@ -84,6 +93,32 @@ public class BOD_Boss : EnemyDamage
     private void FinishAttack()
     {
         isAttacking = false;
+    }
+
+    // Spell
+    private void RangeAttack()
+    {
+        GameObject cur_spell = spells[LoadSpells()];
+        
+        cur_spell.transform.position = new Vector3(
+            player.transform.position.x, 
+            player.transform.position.y + 2.0f, 
+            player.transform.position.z);
+        
+        cur_spell.SetActive(true);
+    }
+
+    private int LoadSpells()
+    {
+        for (int i = 0; i < spells.Length; i++)
+        {
+            if (!spells[i].activeInHierarchy)
+            {
+                return i;
+            }
+        }
+
+        return 0;
     }
 
     private void Chase()
