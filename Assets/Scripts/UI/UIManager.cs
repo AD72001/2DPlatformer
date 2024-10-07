@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     // Clear Stage
     [SerializeField] private GameObject victoryScreen;
     [SerializeField] private AudioClip victorySound;
+    int buildIndex;
 
     void Awake()
     {
@@ -98,6 +99,9 @@ public class UIManager : MonoBehaviour
 
     public void NextLevel(int level)
     {
+        buildIndex = SceneUtility.GetBuildIndexByScenePath($"Level_{level}");
+        if (buildIndex == -1)
+            SceneManager.LoadScene(0);
         SceneManager.LoadScene($"Level_{level}");
     }
     #endregion

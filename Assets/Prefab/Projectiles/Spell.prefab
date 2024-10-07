@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDamage: 1
+  spellSound: {fileID: 8300000, guid: cc6699269b4c1d44ea1e860518b9bb73, type: 3}
   cl: {fileID: 6860467997914267142}
   colliderDistance: -0.5
   range: 3.16

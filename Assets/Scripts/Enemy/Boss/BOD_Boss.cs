@@ -12,6 +12,11 @@ public class BOD_Boss : EnemyDamage
     private Animator animator;
     [SerializeField] private Collider2D cl;
 
+    // Audio
+    [SerializeField] private AudioClip meleeSound;
+    [SerializeField] private AudioClip castSound;
+    [SerializeField] private AudioClip teleSound;
+
     // Melee Attack
     [SerializeField] private float range;
     [SerializeField] private float height;
@@ -25,6 +30,10 @@ public class BOD_Boss : EnemyDamage
     // Spell
     [SerializeField] private GameObject[] spells;
 
+    // Teleport Positions
+    [SerializeField] private Transform[] telepoints;
+    private int teleIndex = 0;
+
     [SerializeField] private float speed;
     public bool isChasing;
     public bool isAttacking;
@@ -33,13 +42,27 @@ public class BOD_Boss : EnemyDamage
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
         phase = 1;
+        animator.SetInteger("phase", phase);
     }
 
     private void Update() 
     {
-        if (phase == 2) 
+        if (phase == 2)
+        {
             isChasing = false;
+        }
 
+        if (!isAttacking)
+        {
+            Flip();
+        }
+
+        if (gameObject.GetComponent<HP>().currentHP <= 4 && phase == 1)
+        {
+            phase = 2;
+            castingCD += 5;
+            animator.SetInteger("phase", phase);
+        }
         
         castingTimer += Time.deltaTime;
         // Melee
@@ -47,6 +70,7 @@ public class BOD_Boss : EnemyDamage
         {
             isChasing = false;
             isAttacking = true;
+            SoundManager.instance.PlaySound(meleeSound);
             animator.SetTrigger("meleeAttack");
         }
 
@@ -56,6 +80,7 @@ public class BOD_Boss : EnemyDamage
             castingTimer = 0;
             isChasing = false;
             isAttacking = true;
+            SoundManager.instance.PlaySound(castSound);
             animator.SetTrigger("rangeAttack");
         }
 
@@ -93,6 +118,30 @@ public class BOD_Boss : EnemyDamage
     private void FinishAttack()
     {
         isAttacking = false;
+    }
+
+    // Teleport
+    private void Teleport()
+    {
+        FinishAttack();
+        animator.SetTrigger("teleport");
+
+        SoundManager.instance.PlaySound(teleSound);
+
+        StartCoroutine(TeleportIE());
+
+        teleIndex++;
+
+        if (teleIndex > telepoints.Length-1)
+        {
+            teleIndex = 0;
+        }
+    }
+
+    private IEnumerator TeleportIE()
+    {
+        yield return new WaitForSeconds(0.8f);
+        transform.position = telepoints[teleIndex].position;
     }
 
     // Spell

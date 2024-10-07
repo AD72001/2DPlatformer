@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss_Spell : EnemyDamage
+public class Boss_Spell : MonoBehaviour
 {
+    // Compont
     private Animator animator;
+
+    //Audio
+    [SerializeField] private AudioClip spellSound;
+
     // Spell Range 
     [SerializeField] private Collider2D cl;
     [SerializeField] private float colliderDistance;
     [SerializeField] private float range;
+    [SerializeField] private float damage;
 
     // Idle Time before attack
     [SerializeField] private float waitTime;
@@ -38,8 +44,10 @@ public class Boss_Spell : EnemyDamage
     {
         if (PlayerInAttackRange())
         {
-            player.GetComponent<HP>().TakeDamage(enemyDamage);
+            player.GetComponent<HP>().TakeDamage(damage);
         }
+
+        SoundManager.instance.PlaySound(spellSound);
 
         animator.SetBool("attack", false);
     }
