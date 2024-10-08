@@ -105,6 +105,7 @@ public class HP : MonoBehaviour
 
         currentLives--;
         AddHP(startingHP);
+        gameObject.GetComponent<PlayerAttack>().projectileTotal += 10;
         animator.ResetTrigger("dead");
         animator.Play("Idle");
 

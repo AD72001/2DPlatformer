@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
         transform.Translate(new Vector3(projMovementSpeed, 0, 0)); 
 
         lifeTime += Time.deltaTime;
-        if (lifeTime >= 10) gameObject.SetActive(false);
+        if (lifeTime >= 5) gameObject.SetActive(false);
     }
 
     void OnTriggerEnter2D(Collider2D collider) 
@@ -35,7 +35,9 @@ public class Projectile : MonoBehaviour
         projBoxCollider.enabled = false;
         projAnimator.SetTrigger("explode");
 
-        if (collider.CompareTag("Enemy") || collider.CompareTag("Object"))
+        if (collider.CompareTag("Enemy")
+            || collider.CompareTag("FinalBoss")
+            || collider.CompareTag("Object"))
         {
             if (collider.GetComponent<HP>() != null)
                 collider.GetComponent<HP>().TakeDamage(1);

@@ -66,7 +66,7 @@ public class BOD_Boss : EnemyDamage
         
         castingTimer += Time.deltaTime;
         // Melee
-        if (PlayerInAttackRange() && !isAttacking)
+        if (PlayerInAttackRange())
         {
             isChasing = false;
             isAttacking = true;

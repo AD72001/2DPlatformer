@@ -20,12 +20,19 @@ public class BossArea2 : MonoBehaviour
     // Invisible Door
     [SerializeField] private GameObject door;
 
+    // Boss
+    [SerializeField] private GameObject boss;
+
     private void Awake() {
         door.GetComponent<Collider2D>().enabled = false;
+        boss.SetActive(true);
     }
 
     private void Update() 
     {
+        if (!boss.gameObject.activeSelf)
+            return;
+        
         spawnTimer += Time.deltaTime;
 
         if (activeItems.Count >= maxItem && (spawnTimer >= spawnCD))

@@ -6,6 +6,12 @@ public class BossArea3 : MonoBehaviour
     // Boss Component
     [SerializeField] private BOD_Boss boss;
 
+    // Player Component
+    private GameObject player;
+
+    // Area Component
+    private Area area;
+
     // Spells 
     [SerializeField] private Boss_Spell[] spells;
     [SerializeField] private Transform[] points;
@@ -15,13 +21,24 @@ public class BossArea3 : MonoBehaviour
 
     private void Awake() 
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        area = GetComponent<Area>();
         boss.gameObject.SetActive(false);
         spellTimer = 0.0f;
     }
 
     private void Update() {
-        if (boss.phase == 2)
+        if (player.GetComponent<HP>().defeat)
         {
+            area.ActivateArea(false);
+            boss.phase = 1;
+            boss.isAttacking = false;
+        }
+
+        // Phase 2 lighting
+        if (boss.phase == 2 && boss.gameObject.activeSelf)
+        {
+            // Lighting CD
             if(spellTimer > spellCD)
             {
                 spellTimer = 0.0f;
@@ -43,7 +60,7 @@ public class BossArea3 : MonoBehaviour
                     }
                 }
 
-                SwitchSpellPosition();
+                SwitchSpellPosition(); // Lightning are not all cast at the same time
             }
             else 
             {

@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Checkpoint
   - Object
+  - FinalBoss
   layers:
   - Default
   - TransparentFX

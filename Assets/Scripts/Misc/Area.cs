@@ -24,6 +24,8 @@ public class Area : MonoBehaviour
             {
                 enemies[i].SetActive(_status);
                 enemies[i].transform.position = enemyInitialPosition[i];
+                if (enemies[i].GetComponent<HP>() != null)
+                    enemies[i].GetComponent<HP>().AddHP(enemies[i].GetComponent<HP>().startingHP);
             }
         }
     }
