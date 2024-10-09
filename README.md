@@ -1,4 +1,4 @@
-# 2DPlatformer
+# 2DPlatformer - Dragon's Adventure
 
 Dragon's Adventure - A Small 2D Platformer Adventure
 
@@ -17,6 +17,10 @@ Two Distinct Stages:
 -- Control a brave dragon warrior as he jumps, runs, and dodges obstacles.
 
 -- Encounter simple enemies with predefined movement patterns.
+
+![img1](./Images/stage_1.png)
+
+![img2](./Images/stage_2.png)
 
 ## Technical Details:
 
