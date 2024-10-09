@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        
+        Time.timeScale = 1;
         gameOverScreen.SetActive(false);
         pauseScreen.SetActive(false);
         victoryScreen.SetActive(false);
@@ -93,6 +93,7 @@ public class UIManager : MonoBehaviour
     #region Victory Screen
     public void Victory()
     {
+        Time.timeScale = 0;
         victoryScreen.SetActive(true);
         SoundManager.instance.PlaySound(victorySound);
     }
@@ -101,8 +102,9 @@ public class UIManager : MonoBehaviour
     {
         buildIndex = SceneUtility.GetBuildIndexByScenePath($"Level_{level}");
         if (buildIndex == -1)
-            SceneManager.LoadScene(0);
-        SceneManager.LoadScene($"Level_{level}");
+            MainMenu();
+        else
+            SceneManager.LoadScene($"Level_{level}");
     }
     #endregion
 }

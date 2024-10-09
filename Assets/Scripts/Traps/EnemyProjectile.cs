@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyProjectile : EnemyDamage
 {
     [SerializeField] private float speed;
-    private BoxCollider2D projBoxCollider;
+    private Collider2D projBoxCollider;
     [SerializeField] private float resetTime;
     private float lifeTime;
     private Animator animator;
@@ -15,7 +15,7 @@ public class EnemyProjectile : EnemyDamage
     {
         hit = false;
         lifeTime = 0;
-        projBoxCollider = GetComponent<BoxCollider2D>();
+        projBoxCollider = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
     }
 
@@ -46,6 +46,7 @@ public class EnemyProjectile : EnemyDamage
                 gameObject.SetActive(false);
         }
     }
+    
     public void ActivateProjectile()
     {
         hit = false;

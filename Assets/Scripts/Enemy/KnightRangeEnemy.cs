@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class KnightRangeEnemy : MonoBehaviour
+public class KnightRangeEnemy : EnemyDamage
 {
     // Enemy Status
     [SerializeField] private float attackCD;
@@ -13,7 +13,7 @@ public class KnightRangeEnemy : MonoBehaviour
     [SerializeField] private float colliderDistance;
     [SerializeField] private LayerMask playerLayer;
 
-    [SerializeField] private Animator animator;
+    [SerializeField] protected Animator animator;
 
     // Projectiles
     [SerializeField] private Transform firePosition;
@@ -28,7 +28,7 @@ public class KnightRangeEnemy : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void Update()
+    protected void Update()
     {
         CDTimer += Time.deltaTime;
 
@@ -70,7 +70,7 @@ public class KnightRangeEnemy : MonoBehaviour
         return 0;
     }
 
-    private bool PlayerInSight()
+    protected bool PlayerInSight()
     {
         RaycastHit2D playerHit = Physics2D.BoxCast(
             enemyCollider.bounds.center + transform.right*range*transform.localScale.x*colliderDistance

@@ -231,12 +231,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee74232b2133e1498065ed65b2f7df2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDamage: 1
+  enemyDamage: 0.5
   speed: 5
   isChasing: 0
   isActive: 0
   animator: {fileID: 593077163084184415}
-  distance: 2
+  distance: 3
   ghostSound: {fileID: 8300000, guid: 2228c3462d2f31145998c190fb160bf5, type: 3}
   startingPoint: {fileID: 8718395441776594951}
 --- !u!114 &6739452087781757595
