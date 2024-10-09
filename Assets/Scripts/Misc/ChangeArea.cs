@@ -7,7 +7,6 @@ public class ChangeArea : MonoBehaviour
 
     private void Update() {
         boss = GameObject.FindGameObjectWithTag("FinalBoss");
-        Debug.Log(boss ==  null);
     }   
 
     private void OnTriggerEnter2D(Collider2D other) 
